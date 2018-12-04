@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 
-class ArticleController
+class ArticleController extends AbstractController
 {
     public function homepage()
     {
@@ -12,9 +12,15 @@ class ArticleController
         return new Response('Test Page');
     }
     
+    /**
+     * 
+     * @Route "/Article/{$slug}"
+     */
     public function show()
     {
-        return new Response('Future page to show one space article.');
+        return $this->render('aricle/show.html.twig', [
+            'title' => ucwords(str_replace('-', ' ', $slug)),
+        ]);
     }
 }
 
