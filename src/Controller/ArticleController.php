@@ -14,7 +14,7 @@ class ArticleController
     
     public function show()
     {
-        return new Response('Future page to show one space article.')
+        return new Response('Future page to show one space article.');
     }
 }
 
