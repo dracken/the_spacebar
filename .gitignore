@@ -12,3 +12,6 @@
 ###< symfony/web-server-bundle ###
 /.buildpath
 /.project
+
+### PHPStorm ###
+/.idea
