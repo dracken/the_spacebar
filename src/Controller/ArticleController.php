@@ -2,15 +2,40 @@
 
 namespace App\Controller;
 
+
+use App\Entity\Article;
+use Doctrine\ORM\EntityManagerInterface;
+use Nexy\Slack\Client;
 use Psr\Log\LoggerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+//use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Service\MarkdownHelper;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
+//use Michelf\MarkdownInterface;
 
 class ArticleController extends AbstractController
 {
+    /**
+     * @var bool
+     * Currently unused:  just showing a controller with a constructor!
+     */
+    private $isDebug;
+    /**
+     * @var Client
+     */
+    private $slack;
+
+    public function __construct(bool $isDebug, Client $slack)
+    {
+        //dump($isDebug);die;
+        $this->isDebug = $isDebug;
+        $this->slack = $slack;
+    }
+
     /**
      * @Route("/", name="app_homepage")
      */
@@ -23,8 +48,35 @@ class ArticleController extends AbstractController
     /**
      * @Route("/article/{slug}", name="article_show")
      */
-    public function show(string $slug, Environment $twigEnvironment)
+    #public function show(string $slug, MarkdownInterface $markdown, EntityManagerInterface $em, AdapterInterface $cache)//, MarkdownHelper $markdownHelper, SlackClient\ $slack)
+    public function show(string $slug, MarkdownHelper $markdown, EntityManagerInterface $em, AdapterInterface $cache, $isDebug, Client $slack)
     {
+        //dump($isDebug);die;
+
+        if ($slug === 'khaaaaaan') {
+            //$slack->sendMessage('Kahn', 'Ah, Kirk, my old friend...');
+            $message = $slack->createMessage()
+                ->from('Khan')
+                ->withIcon(':ghost:')
+                ->setText('Ah, Kirk, my old friend...');
+            $slack->sendMessage($message);
+        }
+
+
+        /**
+         * Database from Chapter 3
+         */
+
+        $repository = $em->getRepository(Article::class);
+        /** @var Article $article */
+        $article = $repository->findOneBy(['slug' => $slug]);
+
+        if (!$article) {
+            throw $this->createNotFoundException(sprintf('No article for slug "%s"', $slug));
+        }
+        //dump($article);die;
+        /**/
+
         $comments = [
             "This is the first comment, it has little to say.",
             "This is another comment, typically we would have pulled this out of the database.",
@@ -32,11 +84,17 @@ class ArticleController extends AbstractController
             
         ];
 
+
         return $this->render("article/show.html.twig",[
+            /* * /
             'title' => ucwords(str_replace("-", " ", $slug)),
             'slug' => $slug,
+            'content' => $articleContent,
+            /**/
+            'article' => $article,
             'comments' => $comments,
         ]);
+
 
     }
 
@@ -46,7 +104,7 @@ class ArticleController extends AbstractController
     public function toggleArticleRoute($slug, LoggerInterface $logger)
     {
 
-        // TODO - actaully heart/unheart the article
+        // TODO - actually heart/unheart the article
 
         $logger->info("Article is being hearted");
 
