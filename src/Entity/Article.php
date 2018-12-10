@@ -36,6 +36,21 @@ class Article
      */
     private $publishedAt;
 
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $publishedBy;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $likes;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image;
+
     public function getAll(): ?array
     {
         return $this;
@@ -90,6 +105,42 @@ class Article
     public function setPublishedAt(?\DateTimeInterface $publishedAt): self
     {
         $this->publishedAt = $publishedAt;
+
+        return $this;
+    }
+
+    public function getPublishedBy(): ?string
+    {
+        return $this->publishedBy;
+    }
+
+    public function setPublishedBy(?string $publishedBy): self
+    {
+        $this->publishedBy = $publishedBy;
+
+        return $this;
+    }
+
+    public function getLikes(): ?int
+    {
+        return $this->likes;
+    }
+
+    public function setLikes(?int $likes): self
+    {
+        $this->likes = $likes;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

@@ -20,21 +20,27 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="row">
-                                <div class="col-sm-8">
+                                <div class="col-sm-6">
                                     Article
                                 </div>
                                 <div class="col-sm-4">
-                                    Published
+                                    Published Date
+                                </div>
+                                <div>
+                                    Published By
                                 </div>
                             </div>
                             {# #}
                             {% for article_list in article %}
                             <div class="row">
-                                <div class="col-sm-8">
+                                <div class="col-sm-6">
                                     <a href="{{ path('article_show', { slug: article_list.slug }) }}">{{  article_list.title }}</a>
                                 </div>
                                 <div class="col-sm-4">
-                                    {{ article_list.publishedat | date }}
+                                   {{ article_list.publishedAt | time_diff }} - {{ article_list.publishedat | date }}
+                                </div>
+                                <div class="col-sm-2">
+                                    {{ article_list.publishedBy }}
                                 </div>
                             </div>
                             {% endfor %}
