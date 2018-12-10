@@ -36,6 +36,11 @@ class Article
      */
     private $publishedAt;
 
+    public function getAll(): ?array
+    {
+        return $this;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

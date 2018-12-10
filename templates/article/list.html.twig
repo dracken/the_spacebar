@@ -1,0 +1,60 @@
+{%  extends 'base.html.twig' %}
+{# Show Article Template #}
+
+{%  block body %}
+
+    {#{ dump() }#}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="show-article-container p-3 mt-4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                             <div class="show-article-title-container d-inline-block pl-3 align-middle">
+                                <span class="show-article-title ">Article List</span>
+                                <br>
+                                <span class="pl-2 article-details">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    Article
+                                </div>
+                                <div class="col-sm-4">
+                                    Published
+                                </div>
+                            </div>
+                            {# #}
+                            {% for article_list in article %}
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <a href="{{ path('article_show', { slug: article_list.slug }) }}">{{  article_list.title }}</a>
+                                </div>
+                                <div class="col-sm-4">
+                                    {{ article_list.publishedat | date }}
+                                </div>
+                            </div>
+                            {% endfor %}
+                            {# #}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <p class="share-icons mb-5"><span class="pr-1">Share:</span> <i class="pr-1 fa fa-facebook-square"></i><i class="pr-1 fa fa-twitter-square"></i><i class="pr-1 fa fa-reddit-square"></i><i class="pr-1 fa fa-share-alt-square"></i></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{%  endblock %}
+
+{%  block javascripts %}
+    {{  parent() }}
+
+    <script src="{{ asset('js/article_show.js') }}"></script>
+{% endblock %}

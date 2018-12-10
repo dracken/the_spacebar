@@ -21,7 +21,6 @@
         "symfony/dotenv": "4.2.*",
         "symfony/flex": "^1.1",
         "symfony/framework-bundle": "4.2.*",
-        "symfony/maker-bundle": "^1.9",
         "symfony/twig-bundle": "4.2.*",
         "symfony/web-server-bundle": "4.2.*",
         "symfony/yaml": "4.2.*"
@@ -75,6 +74,7 @@
     "require-dev": {
         "easycorp/easy-log-handler": "^1.0.7",
         "symfony/debug-bundle": "^3.3|^4.0",
+        "symfony/maker-bundle": "^1.9",
         "symfony/monolog-bundle": "^3.0",
         "symfony/profiler-pack": "^1.0",
         "symfony/var-dumper": "^3.3|^4.0"

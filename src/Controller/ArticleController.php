@@ -4,8 +4,8 @@ namespace App\Controller;
 
 
 use App\Entity\Article;
+use App\Service\SlackClient;
 use Doctrine\ORM\EntityManagerInterface;
-use Nexy\Slack\Client;
 use Psr\Log\LoggerInterface;
 //use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,16 +24,11 @@ class ArticleController extends AbstractController
      * Currently unused:  just showing a controller with a constructor!
      */
     private $isDebug;
-    /**
-     * @var Client
-     */
-    private $slack;
 
-    public function __construct(bool $isDebug, Client $slack)
+    public function __construct(bool $isDebug)
     {
         //dump($isDebug);die;
         $this->isDebug = $isDebug;
-        $this->slack = $slack;
     }
 
     /**
@@ -44,22 +39,39 @@ class ArticleController extends AbstractController
         
         return $this->render('article/homepage.html.twig');
     }
+
+    /**
+     * @Route("/article", name="article")
+     */
+    public function show_articles(EntityManagerInterface $em)
+    {
+        $repository = $em->getRepository(Article::class);
+        /** @var Article $article */
+        $article = $repository->findAll();
+
+        return $this->render("article/list.html.twig", [
+            'article' => $article,
+        ]);
+    }
     
     /**
      * @Route("/article/{slug}", name="article_show")
      */
     #public function show(string $slug, MarkdownInterface $markdown, EntityManagerInterface $em, AdapterInterface $cache)//, MarkdownHelper $markdownHelper, SlackClient\ $slack)
-    public function show(string $slug, MarkdownHelper $markdown, EntityManagerInterface $em, AdapterInterface $cache, $isDebug, Client $slack)
+    public function show(string $slug, MarkdownHelper $markdown, EntityManagerInterface $em, AdapterInterface $cache, $isDebug, SlackClient $slack)
     {
         //dump($isDebug);die;
 
         if ($slug === 'khaaaaaan') {
-            //$slack->sendMessage('Kahn', 'Ah, Kirk, my old friend...');
-            $message = $slack->createMessage()
-                ->from('Khan')
-                ->withIcon(':ghost:')
-                ->setText('Ah, Kirk, my old friend...');
-            $slack->sendMessage($message);
+            $slack->sendMessage('Kahn', 'Ah, Kirk, my old friend...');
+
+            return $this->render("article/show.html.twig", [
+                'article' => ['title' => "Khaaaaaan",
+                    "content" => "Khaaaaaan",
+                    "slug" => $slug
+                    ],
+                'comments' => []
+            ]);
         }
 
 
