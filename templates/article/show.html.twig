@@ -19,7 +19,7 @@
                                 <span class="show-article-title ">{{  article.title }}{#{ title }#}</span>
                                 <br>
                                 <span class="align-left article-details"><img class="article-author-img rounded-circle" src="{{ asset('images/alien-profile.png') }}"> {{ article.publishedBy }} </span>
-                                <span class="pl-2 article-details"> {#3 hours ago#}{{ published_date }} -  {{ article.publishedAt | date("m/d/Y @ H:i:s", "America/Denver") }} {# calculate #}</span>
+                                <span class="pl-2 article-details"> {{ article.publishedAt ? article.publishedAt | time_diff : 'unpublished' }} -  {{ article.publishedAt ? article.publishedAt | date("m/d/Y @ H:i:s") : 'unpublished'}} {# calculate #}</span>
                                 <span class="pl-2 article-details">
                                     <span class="js-like-article-count">5</span>
                                     <a href="{{  path('article_toggle_heart', {slug: article.slug}) }}{#{  path('article_toggle_heart', {slug: slug}) }#}" class="fa fa-heart-o like-article js-like-article"></a> </span>
@@ -30,7 +30,7 @@
                         <div class="col-sm-12">
                             <div class="article-text">
 
-                            {{ article.content|markdown }}
+                            {{ article.content|cached_markdown }}
                                 {#{ content|markdown }#}
                             </div>
                         </div>

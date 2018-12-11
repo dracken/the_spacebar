@@ -17,7 +17,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row article-container my-1"">
                         <div class="col-sm-12">
                             <div class="row">
                                 <div class="col-sm-6">
@@ -33,13 +33,13 @@
                             {# #}
                             {% for article_list in article %}
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-6 article-details float-right">
                                     <a href="{{ path('article_show', { slug: article_list.slug }) }}">{{  article_list.title }}</a>
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-4 article-details float-right">
                                    {{ article_list.publishedAt | time_diff }} - {{ article_list.publishedat | date }}
                                 </div>
-                                <div class="col-sm-2">
+                                <div class="col-sm-2 article-details float-right">
                                     {{ article_list.publishedBy }}
                                 </div>
                             </div>

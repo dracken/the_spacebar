@@ -36,7 +36,7 @@ class ArticleController extends AbstractController
      */
     public function homepage(EntityManagerInterface $em)
     {
-        $repository = $em->getRepository(Article:class);
+        $repository = $em->getRepository(Article::class);
 
         $article = $repository->findAll();
         return $this->render('article/homepage.html.twig', [
@@ -61,11 +61,13 @@ class ArticleController extends AbstractController
     /**
      * @Route("/article/{slug}", name="article_show")
      */
-    #public function show(string $slug, MarkdownInterface $markdown, EntityManagerInterface $em, AdapterInterface $cache)//, MarkdownHelper $markdownHelper, SlackClient\ $slack)
     public function show(string $slug, MarkdownHelper $markdown, EntityManagerInterface $em, AdapterInterface $cache, $isDebug, SlackClient $slack)
     {
         //dump($isDebug);die;
 
+        /*
+         * Slack Message Catch
+         */
         if ($slug === 'khaaaaaan') {
             $slack->sendMessage('Kahn', 'Ah, Kirk, my old friend...');
 
@@ -87,6 +89,9 @@ class ArticleController extends AbstractController
         /** @var Article $article */
         $article = $repository->findOneBy(['slug' => $slug]);
 
+        /*
+         * Throw a 404 error if slug isn't found
+         */
         if (!$article) {
             throw $this->createNotFoundException(sprintf('No article for slug "%s"', $slug));
         }

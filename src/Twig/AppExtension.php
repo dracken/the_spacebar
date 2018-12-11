@@ -9,13 +9,13 @@ use Twig\TwigFunction;
 
 class AppExtension extends AbstractExtension
 {
-    /*
+
     private $markdownHelper;
 
     public function __construct(MarkdownHelper $markdownHelper)
     {
         $this->markdownHelper = $markdownHelper;
-    }*/
+    }
 
     public function getFilters(): array
     {

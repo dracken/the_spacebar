@@ -51,6 +51,11 @@ class Article
      */
     private $image;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $published = false;
+
     public function getAll(): ?array
     {
         return $this;
@@ -141,6 +146,18 @@ class Article
     public function setImage(?string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getPublished(): ?bool
+    {
+        return $this->published;
+    }
+
+    public function setPublished(?bool $published): self
+    {
+        $this->published = $published;
 
         return $this;
     }
