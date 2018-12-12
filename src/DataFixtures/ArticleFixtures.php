@@ -53,8 +53,9 @@ class ArticleFixtures extends BaseFixture
                 ;
             /*  * /
             $article->setTitle('Why Asteroids Taste Like Bacon')
-                ->setSlug('why-astroids-taste-like-bacon-'.rand(100,999))
-                ->setContent(<<<EOF
+                ->setSlug('why-astroids-taste-like-bacon-'.rand(100,999));
+            /* */
+            $article->setContent(<<<EOF
 Spicy **jalapeno bacon** ipsum dolor amet veniam shank in dolore. Ham hock nisi landjaeger cow,
 lorem proident [beef ribs](https://baconipsum.com/) aute enim veniam ut cillum pork chuck picanha. Dolore reprehenderit
 labore minim pork belly spare ribs cupim short loin in. Elit exercitation eiusmod dolore cow
@@ -83,10 +84,9 @@ EOF
             $article->setAuthor('Dracken Firebreather')
                 ->setLikes(rand(5, 100))
                 ;
-            */
 
             $comment1 = new Comment();
-            $comment1->setAuthorName('Mike Ferengi');
+            $comment1->setAuthorName($this->faker->randomElement(self::$articleAuthors));
             $comment1->setCOntent('I ate a normal rock once.  It did NOT taste like bacon!');
             $comment1->setArticle($article);
             $manager->persist($comment1);
@@ -96,6 +96,10 @@ EOF
             $comment2->setCOntent('The Bacon flavored Asteroid is a rare and delicious celestial body!');
             $comment2->setArticle($article);
             $manager->persist($comment2);
+
+            //$article->addComment($comment1);
+            //$article->addComment($comment2);
+            */
         });
 
         $manager->flush();

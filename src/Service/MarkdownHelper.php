@@ -23,8 +23,7 @@ class MarkdownHelper
         $this->isDebug = $isDebug;
     }
 
-    public function parse(string $source): string
-
+    public function parse(string $source): ?string
     {
         if (stripos($source, 'bacon') !== false) {
             $this->logger->info('They are talking about bacon again!');

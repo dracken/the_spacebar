@@ -23,11 +23,14 @@ class ArticleRepository extends ServiceEntityRepository
     /**
      * @returns Article[]
      */
-    public function findAllPublishedOrderedByNewest()
+    public function findAllPublishedOrderedByNewest(int $maxResults = 5)
     {
+        $this->createQueryBuilder('article')
+            ->addCriteria(CommentRepository::createNonDeletedCriteria());
+
         return $this->addIsPublishedQueryBuilder()
             ->orderBy('articles.publishedAt', 'DESC')
-            ->setMaxResults(5)
+            ->setMaxResults($maxResults)
             ->getQuery()
             ->getResult()
             ;

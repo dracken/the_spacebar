@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
+use App\Repository\CommentRepository;
 use App\Service\SlackClient;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
@@ -86,31 +87,6 @@ class ArticleController extends AbstractController
         }
 
 
-        /**
-         * Database from Chapter 3
-         */
-
-        //$repository = $em->getRepository(Article::class);
-        /** @var Article $article */
-        //$article = $repository->findOneBy(['slug' => $slug]);
-
-        /*
-         * Throw a 404 error if slug isn't found
-         * /
-        if (!$article) {
-            throw $this->createNotFoundException(sprintf('No article for slug "%s"', $slug));
-        }
-        //dump($article);die;
-        /**/
-
-        $comments = [
-            "This is the first comment, it has little to say.",
-            "This is another comment, typically we would have pulled this out of the database.",
-            "This is the 3rd comment, finally we have enough to iterate through.",
-            
-        ];
-
-
         return $this->render("article/show.html.twig",[
             /* * /
             'title' => ucwords(str_replace("-", " ", $slug)),
@@ -118,7 +94,6 @@ class ArticleController extends AbstractController
             'content' => $articleContent,
             /**/
             'article' => $article,
-            'comments' => $comments,
         ]);
 
 
