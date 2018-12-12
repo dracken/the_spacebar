@@ -37,10 +37,10 @@
                                     <a href="{{ path('article_show', { slug: article_list.slug }) }}">{{  article_list.title }}</a>
                                 </div>
                                 <div class="col-sm-4 article-details float-right">
-                                   {{ article_list.publishedAt | time_diff }} - {{ article_list.publishedat | date }}
+                                   {{ article_list.publishedAt ? article_list.publishedAt | ago : 'unpublished'}} - {{ article_list.publishedAt ? article_list.publishedat | date : 'unpublished'}}
                                 </div>
                                 <div class="col-sm-2 article-details float-right">
-                                    {{ article_list.publishedBy }}
+                                    {{ article_list.author }}
                                 </div>
                             </div>
                             {% endfor %}

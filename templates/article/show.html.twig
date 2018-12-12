@@ -14,23 +14,22 @@
                 <div class="show-article-container p-3 mt-4">
                     <div class="row">
                         <div class="col-sm-12">
-                            <img class="show-article-img" src="{#{ asset('images/asteroid.jpeg') }#}{{ article.image }}">
+                            <img class="show-article-img" src="{{ asset(article.imagePath) }}">
                             <div class="show-article-title-container d-inline-block pl-3 align-middle">
                                 <span class="show-article-title ">{{  article.title }}{#{ title }#}</span>
                                 <br>
-                                <span class="align-left article-details"><img class="article-author-img rounded-circle" src="{{ asset('images/alien-profile.png') }}"> {{ article.publishedBy }} </span>
-                                <span class="pl-2 article-details"> {{ article.publishedAt ? article.publishedAt | time_diff : 'unpublished' }} -  {{ article.publishedAt ? article.publishedAt | date("m/d/Y @ H:i:s") : 'unpublished'}} {# calculate #}</span>
+                                <span class="align-left article-details"><img class="article-author-img rounded-circle" src="{{ asset('images/alien-profile.png') }}"> {{ article.author }} </span>
+                                <span class="pl-2 article-details"> {{ article.publishedAt ? article.publishedAt | ago : 'unpublished' }} -  {{ article.publishedAt ? article.publishedAt | date("m/d/Y @ H:i:s") : 'unpublished'}} {# calculate #}</span>
                                 <span class="pl-2 article-details">
-                                    <span class="js-like-article-count">5</span>
-                                    <a href="{{  path('article_toggle_heart', {slug: article.slug}) }}{#{  path('article_toggle_heart', {slug: slug}) }#}" class="fa fa-heart-o like-article js-like-article"></a> </span>
+                                    <span class="js-like-article-count">{{ article.likes }}</span>
+                                    <a href="{{  path('article_toggle_heart', {slug: article.slug}) }}" class="fa fa-heart-o like-article js-like-article"></a> </span>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="article-text">
-
-                            {{ article.content|cached_markdown }}
+                                {{ article.content|cached_markdown }}
                                 {#{ content|markdown }#}
                             </div>
                         </div>

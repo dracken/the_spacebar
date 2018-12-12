@@ -2,13 +2,19 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
  */
 class Article
 {
+    use TimestampableEntity;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -23,6 +29,7 @@ class Article
 
     /**
      * @ORM\Column(type="string", length=100, unique=true)
+     * @Gedmo\Slug(fields={"title"})
      */
     private $slug;
 
@@ -39,12 +46,12 @@ class Article
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $publishedBy;
+    private $author;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $likes;
+    private $likes = 0;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -55,6 +62,17 @@ class Article
      * @ORM\Column(type="boolean")
      */
     private $published = false;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="article")
+     */
+    private $comments;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+    }
+
 
     public function getAll(): ?array
     {
@@ -114,14 +132,14 @@ class Article
         return $this;
     }
 
-    public function getPublishedBy(): ?string
+    public function getAuthor(): ?string
     {
-        return $this->publishedBy;
+        return $this->author;
     }
 
-    public function setPublishedBy(?string $publishedBy): self
+    public function setAuthor(?string $author): self
     {
-        $this->publishedBy = $publishedBy;
+        $this->author = $author;
 
         return $this;
     }
@@ -158,6 +176,49 @@ class Article
     public function setPublished(?bool $published): self
     {
         $this->published = $published;
+
+        return $this;
+    }
+
+    public function getImagePath()
+    {
+        return 'images/'.$this->getImage();
+    }
+
+    public function incrementLikeCount(): self
+    {
+        $this->likes = $this->likes + 1;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getArticle() === $this) {
+                $comment->setArticle(null);
+            }
+        }
 
         return $this;
     }
