@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Article;
+use App\Entity\Comment;
 use Doctrine\Common\Persistence\ObjectManager;
 
 class ArticleFixtures extends BaseFixture
@@ -30,7 +31,7 @@ class ArticleFixtures extends BaseFixture
 
     public function loadData(ObjectManager $manager)
     {
-        $this->createMany(Article::class, 10, function(Article $article, $count) {
+        $this->createMany(Article::class, 10, function(Article $article, $count) use ($manager) {
 
             // Publish most articles
             if ($this->faker->boolean(70)) {
@@ -44,6 +45,7 @@ class ArticleFixtures extends BaseFixture
                 ->setAuthor($this->faker->randomElement(self::$articleAuthors))
                 ->setImage($this->faker->randomElement(self::$articleImages))
             ;
+
             /*  * /
             $article->setAuthor('Dracken Firebreather')
                 ->setLikes($this->faker->numberBetween(5, 100))
@@ -82,6 +84,18 @@ EOF
                 ->setLikes(rand(5, 100))
                 ;
             */
+
+            $comment1 = new Comment();
+            $comment1->setAuthorName('Mike Ferengi');
+            $comment1->setCOntent('I ate a normal rock once.  It did NOT taste like bacon!');
+            $comment1->setArticle($article);
+            $manager->persist($comment1);
+
+            $comment2 = new Comment();
+            $comment2->setAuthorName('Dracken Firebreather');
+            $comment2->setCOntent('The Bacon flavored Asteroid is a rare and delicious celestial body!');
+            $comment2->setArticle($article);
+            $manager->persist($comment2);
         });
 
         $manager->flush();
