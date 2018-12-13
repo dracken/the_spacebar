@@ -8,6 +8,10 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;
 use Faker\Generator;
 
+/**
+ * Class BaseFixture
+ * @package App\DataFixtures
+ */
 abstract class BaseFixture extends Fixture
 {
     /** @var ObjectManager */
@@ -16,10 +20,20 @@ abstract class BaseFixture extends Fixture
     /** @var Generator */
     protected $faker;
 
+    /**
+     * @var array
+     */
     private $referencesIndex = [];
 
+    /**
+     * @param ObjectManager $manager
+     * @return mixed
+     */
     abstract protected function loadData(ObjectManager $manager);
 
+    /**
+     * @param ObjectManager $manager
+     */
     public function load(ObjectManager $manager)
     {
         $this->manager = $manager;
@@ -28,6 +42,11 @@ abstract class BaseFixture extends Fixture
         $this->loadData($manager);
     }
 
+    /**
+     * @param string $className
+     * @param int $count
+     * @param callable $factory
+     */
     protected function createMany(string $className, int $count, callable $factory)
     {
         for ($i = 0; $i < $count; $i++)
@@ -41,6 +60,11 @@ abstract class BaseFixture extends Fixture
         }
     }
 
+    /**
+     * @param string $className
+     * @return object
+     * @throws \Exception
+     */
     protected function getRandomReference(string $className) {
         if (!isset($this->referencesIndex[$className])) {
             $this->referencesIndex[$className] = [];
@@ -55,5 +79,22 @@ abstract class BaseFixture extends Fixture
         }
         $randomReferenceKey = $this->faker->randomElement($this->referencesIndex[$className]);
         return $this->getReference($randomReferenceKey);
+    }
+
+    /**
+     * @param string $className
+     * @param int $count
+     * @return array
+     * @throws \Exception
+     */
+    protected function getRandomReferences(string $className, int $count)
+    {
+        $references = [];
+
+        while (count($references) < $count) {
+            $references[] = $this->getRandomReference($className);
+        }
+
+        return $references;
     }
 }

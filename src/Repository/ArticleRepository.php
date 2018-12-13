@@ -26,6 +26,8 @@ class ArticleRepository extends ServiceEntityRepository
     public function findAllPublishedOrderedByNewest(int $maxResults = 5)
     {
         $this->createQueryBuilder('article')
+            ->leftJoin('a.tags', 't')
+            ->addSelect('t')
             ->addCriteria(CommentRepository::createNonDeletedCriteria());
 
         return $this->addIsPublishedQueryBuilder()

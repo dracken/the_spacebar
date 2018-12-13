@@ -4,23 +4,37 @@ namespace App\DataFixtures;
 
 use App\Entity\Article;
 use App\Entity\Comment;
+use App\Entity\Tag;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class ArticleFixtures extends BaseFixture
+/**
+ * Class ArticleFixtures
+ * @package App\DataFixtures
+ */
+class ArticleFixtures extends BaseFixture implements DependentFixtureInterface
 {
-
+    /**
+     * @var array
+     */
     private static $articleTitles = [
       'Why Asteroids Taste Like Bacon',
       'Life on Planet Mercury: Tan, Relaxing and Fabulous',
       'Light Speed Travel: Fountain of Youth or Fallacy',
     ];
 
+    /**
+     * @var array
+     */
     private static $articleImages = [
       'asteroid.jpeg',
       'mercury.jpeg',
       'lightspeed.png',
     ];
 
+    /**
+     * @var array
+     */
     private static $articleAuthors = [
       'Captain Kirk',
       'Ambassador Spock',
@@ -29,6 +43,10 @@ class ArticleFixtures extends BaseFixture
       'President Scroob',
     ];
 
+    /**
+     * @param ObjectManager $manager
+     * @return mixed|void
+     */
     public function loadData(ObjectManager $manager)
     {
         $this->createMany(Article::class, 10, function(Article $article, $count) use ($manager) {
@@ -74,6 +92,13 @@ cow est ribeye adipisicing. Pig hamburger pork belly enim. Do porchetta minim ca
 fugiat.
 EOF
                 );
+
+            $tags = $this->getRandomReferences(Tag::class, $this->faker->numberBetween(0, 5));
+            foreach ($tags as $tag) {
+                $article->addTag($tag);
+            }
+            //dump($tags);die;
+
             /*
             // Publish most articles
             if (rand(1, 10) > 2) {
@@ -103,5 +128,12 @@ EOF
         });
 
         $manager->flush();
+    }
+
+    public function getDependencies()
+    {
+        return [
+          TagFixtures::class,
+        ];
     }
 }
