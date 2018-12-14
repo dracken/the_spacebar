@@ -18,7 +18,7 @@
 
                 <!-- Supporting Articles -->
 
-                {% for article in articles %}
+                {% for article in pagination %}
                     <div class="article-container my-1">
                         <a href="{{ path('article_show', {slug: article.slug}) }}">
                             <img class="article-img" alt="{{ article.imagePath }}" src="{{ asset(article.imagePath) }}">
@@ -40,6 +40,12 @@
                     </div>
 
                 {% endfor %}
+
+
+                <div align="center">
+                    Total Articles: ({{ pagination.getTotalItemCount }})
+                    {{  knp_pagination_render(pagination) }}
+                </div>
 
             </div>
 

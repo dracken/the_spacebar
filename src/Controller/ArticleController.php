@@ -9,6 +9,7 @@ use App\Repository\CommentRepository;
 use App\Service\SlackClient;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
+use Knp\Component\Pager\PaginatorInterface;
 use Psr\Log\LoggerInterface;
 //use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,6 +20,7 @@ use App\Service\MarkdownHelper;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 //use Michelf\MarkdownInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 class ArticleController extends AbstractController
 {
@@ -37,17 +39,32 @@ class ArticleController extends AbstractController
     /**
      * @Route("/", name="app_homepage")
      */
-    public function homepage(ArticleRepository $repository)
+    public function homepage(ArticleRepository $repository, PaginatorInterface $paginator, Request $request)
     {
         /*$repository = $em->getRepository(Article::class);
         $articles = $repository->findBy(['published' => '1'], ['publishedAt' => 'DESC']);# old, busted
-        */
+        * /
         $articles = $repository->findAllPublishedOrderedByNewest();# new hotness
         //dump($repository);die;
 
         return $this->render('article/homepage.html.twig', [
             'articles' => $articles,
         ]);
+        /* */
+
+        $articles = $repository->findAllPublishedOrderedByNewest();
+
+        $pagination = $paginator->paginate(
+            $articles,
+            $request->query->getInt('page', 1), #page number
+            5 #limit per page
+
+        );
+
+        return $this->render('article/homepage.html.twig', [
+            'pagination' => $pagination,
+        ]);
+        /* */
     }
 
     /**
