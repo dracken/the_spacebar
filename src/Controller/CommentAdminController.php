@@ -39,7 +39,7 @@ class CommentAdminController extends AbstractController
 
         }
 
-        return $this->render('comment_admin/index.html.twig', [
+        return $this->render('comment_admin/login.html.twig', [
             'comments' => $comments,
 
         ]);

@@ -49,7 +49,7 @@ class ArticleFixtures extends BaseFixture implements DependentFixtureInterface
      */
     public function loadData(ObjectManager $manager)
     {
-        $this->createMany(Article::class, 10, function(Article $article, $count) use ($manager) {
+        $this->createManyOld(Article::class, 10, function(Article $article, $count) use ($manager) {
 
             // Publish most articles
             if ($this->faker->boolean(70)) {

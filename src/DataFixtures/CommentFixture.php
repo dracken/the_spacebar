@@ -28,7 +28,7 @@ class CommentFixture extends BaseFixture implements DependentFixtureInterface
         // $product = new Product();
         // $manager->persist($product);
 
-        $this->createMany(Comment::class, 100, function(Comment $comment) {
+        $this->createManyOld(Comment::class, 100, function(Comment $comment) {
             $comment->setContent(
                 $this->faker->boolean ? $this->faker->paragraph : $this->faker->sentence(2, true)
             );
