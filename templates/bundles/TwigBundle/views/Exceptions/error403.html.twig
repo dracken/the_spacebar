@@ -1,0 +1,10 @@
+{# templates/bundles/TwigBundle/Exception/error404.html.twig #}
+{% extends '../../../../base.html.twig' %}
+
+{% block content_body %}
+    <h1>Access Denied!</h1>
+
+    <p>
+        You do not have the necessary permissions to access that page.  <a href="{{ path('homepage') }}">Return to the homepage</a>.
+    </p>
+{% endblock %}

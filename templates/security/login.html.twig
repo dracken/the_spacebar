@@ -8,7 +8,12 @@
 {% endblock %}
 
 {% block content_body %}
-    {#{ dump(error) }#}
+    {% if error is defined and error is not null %}
+        <span class="bg-danger">
+            {{ dump(error) }}
+        </span>
+    {%  endif %}
+
 
     <form class="form-signin" method="post">
         {% if error %}
@@ -19,9 +24,10 @@
         <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token(('authenticate')) }}">
         <div class="checkbox mb-3">
             <label>
-                <input type="checkbox" value="remember-me"> Remember me
+                <input type="checkbox" value="_remember_me"> Remember me
             </label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">

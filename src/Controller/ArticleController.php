@@ -41,6 +41,7 @@ class ArticleController extends AbstractController
      */
     public function homepage(ArticleRepository $repository, PaginatorInterface $paginator, Request $request)
     {
+        //dd($repository, $paginator, $request);
         /*$repository = $em->getRepository(Article::class);
         $articles = $repository->findBy(['published' => '1'], ['publishedAt' => 'DESC']);# old, busted
         * /
