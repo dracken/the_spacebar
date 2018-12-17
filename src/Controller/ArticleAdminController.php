@@ -17,6 +17,8 @@ class ArticleAdminController extends AbstractController
      */
     public function new(EntityManagerInterface $em)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         die('todo');
         $article = new Article();
 
