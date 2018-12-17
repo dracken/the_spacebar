@@ -1,0 +1,69 @@
+##
+#   Docker Compose File for Stay Alert API
+#
+# Requires Docker 18.06.0+
+#
+# @see https://developers.redhat.com/blog/2016/02/24/10-things-to-avoid-in-docker-containers/
+#
+##
+
+version: '3.7'
+services:
+    # See https://hub.docker.com/_/mariadb/
+    mysql:
+        build: docker/the_spacebar_mariadb/.
+        image: the-spacebar-mariadb
+        hostname: the_spacebar_mysql.local
+        container_name: the_spacebar_mariadb
+        volumes:
+            - .docker/data/db:/var/lib/mysql
+        env_file:
+            - .env.local
+        ports:
+            - "3307:3306"
+        environment:
+            SPACEBAR_MYSQL_ROOT_PASSWORD=root_password:
+
+    # See https://hub.docker.com/_/nginx/
+    nginx-api:
+        build: docker/the_spacebar_nginx/.
+        image: the-spacebar-nginx
+        hostname: the_spacebar_nginx.local
+        container_name: the_spacebar_nginx
+        ports:
+            - "8001:80"
+        volumes:
+            - .:/var/www/:rw
+            - ./logs:/var/log/nginx
+        depends_on:
+            - php-api
+        links:
+            - php-api
+        command: [nginx-debug, '-g', 'daemon off;']
+        environment:
+            HOSTNAME: the_spacebar_nginx.local
+
+    # See https://hub.docker.com/_/php/
+    php-api:
+        build: docker/the_spacebar_php/.
+        image: the-spacebar-php-fpm
+        hostname: the_spacebar_php.local
+        container_name: the_spacebar_php
+        volumes:
+            - .:/var/www/:rw
+            - ./logs:/var/log
+        environment:
+            maildev_host: the_spacebar_maildev
+            HOSTNAME: the_spacebar_php.local
+            PHP_XDEBUG_ENABLED: 1 # Set 1 to enable
+            XDEBUG_CONFIG: remote_host=${HOST_IP} # IP Address of the Docker HOST (i.e., your computer) and not localhost, :::0 or 127.0.0.1
+        depends_on:
+           # - maildev
+            - mysql
+        links:
+            - mysql
+        env_file:
+            - api/.env.local
+        tty: true
+        expose:
+            - 9000 
