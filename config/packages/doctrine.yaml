@@ -31,6 +31,7 @@ doctrine:
             App:
                 is_bundle: false
                 type: annotation
+                #type: yml # if/when annotations is cumbersome and needs to be removed
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'App\Entity'
                 alias: App
