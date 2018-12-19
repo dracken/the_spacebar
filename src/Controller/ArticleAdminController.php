@@ -4,9 +4,13 @@ namespace App\Controller;
 
 
 use App\Entity\Article;
+use App\Form\ArticleFormType;
+use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use http\Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -19,13 +23,47 @@ class ArticleAdminController extends AbstractController
 
     /**
      * @IsGranted("ROLE_ADMIN_ARTICLE")
-     * @Route("/admin/article/new")
+     * @Route("/admin/article/new", name="app_articleadmin_new")
+     * @param EntityManagerInterface $em
+     * @return Response
      */
-    public function new(EntityManagerInterface $em)
+    public function new(EntityManagerInterface $em, Request $request)
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        die('todo');
+        //die('todo');
+
+        $form = $this->createForm(ArticleFormType::class);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            //dd($form->getData());
+
+            $datePublished  = new \DateTime('@'.strtotime('now'));
+
+            $data = $form->getData();
+            $article = new Article();
+            $article->SetTitle($data['title']);
+            $article->setContent($data['content']);
+            $article->setAuthor($this->getUser());
+            $article->setImage('mercury.jpeg');
+            $article->setPublished(true);
+            $article->setPublishedAt($datePublished);
+
+            $em->persist($article);
+            $em->flush();
+
+            $this->addFlash('success', 'Article Created!');
+
+            return $this->redirectToRoute('app_articleadmin_list');
+        }
+
+        return $this->render('article_admin/new.html.twig',
+            [
+                'articleForm' => $form->createView(),
+            ]);
+    /*
+        return new Response
         $article = new Article();
 
         $article->setTitle('Why Asteroids Taste Like Bacon')
@@ -64,21 +102,39 @@ EOF
             $article->getId(),
             $article->getSlug()
         ));
+    */
     }
 
     /**
-     * @Route("/admin/article/{id}/edit")
+     * @Route("/admin/article/{id}/edit", name="app_articleadmin_edit")
      * @param Article $article
      * @IsGranted("MANAGE", subject="article")
+     * @return mixed
      */
     public function edit(Article $article)
     {
-        /** @var TYPE_NAME $article */
+        /** @var Article $article */
         if (!$this->denyAccessUnlessGranted('MANAGE', $article)) {
             //dd($article);
-            return $this->render('article/edit.html.twig',[
+            return $this->render('article_admin/edit.html.twig',[
                 'article' => $article,
             ]);
         }
+
+        return $this->createAccessDeniedException();
+    }
+
+    /**
+     * @Route("/admin/article", name="app_articleadmin_list")
+     * @param ArticleRepository $articleRepo
+     * @return Response
+     */
+    public function list(ArticleRepository $articleRepo)
+    {
+        $articles = $articleRepo->findAll();
+
+        return $this->render('article_admin/list.html.twig', [
+            'articles' => $articles,
+        ]);
     }
 }

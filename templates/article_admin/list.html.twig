@@ -1,0 +1,31 @@
+{% extends 'content_base.html.twig' %}
+
+{% block content_body %}
+    <a href="{{ path('app_articleadmin_new') }}" class="btn btn-primary pull-right">
+        Create <span class="fa fa-plus-circle"></span>
+    </a>
+    <h1>All Articles</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Edit</th>
+            <th>Published?</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+                <td>{{ article.title }}</td>
+                <td>{{ article.author.email }}</td>
+                <td><a href="{{ path('app_articleadmin_edit', {'id': article.id}) }}"<span class="btn btn-primary">Edit</span></td>
+                <td>
+                    <span class="fa fa-{{ article.isPublished ? 'check' : 'times' }}"></span>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -268,4 +268,10 @@ class Article
 
         return $this;
     }
+
+    public function isPublished(): bool
+    {
+        return $this->published;
+    }
+
 }
