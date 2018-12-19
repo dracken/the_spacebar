@@ -1,0 +1,40 @@
+{% extends 'content_base.html.twig' %}
+
+{% block title %}Register!{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+{% endblock %}
+
+{% block content_body %}
+    {% if error is defined and error is not null %}
+        <span class="bg-danger">
+            {{ dump(error) }}
+        </span>
+    {%  endif %}
+
+    {# todo - replace with a Symfony form! #}
+    <form class="form-signin" method="post">
+        {#% if error %}
+            <div class="alert alert-danger">Danger Will Robinson!<br> {{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %#}
+        <h1 class="h3 mb-3 font-weight-normal">Register</h1>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <label for="confirmPassword" class="sr-only">Confirm Password</label>
+        <input type="password" name="confirm_password" id="confirmPassword" class="form-control" placeholder="Confirm Password" required>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token(('authenticate')) }}">
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" value="agree_to_terms"> Agree to <a href="#">terms</a> I for sure read
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">
+            Register
+        </button>
+    </form>
+
+{% endblock %}

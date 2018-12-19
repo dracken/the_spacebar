@@ -60,7 +60,7 @@ class ArticleFixtures extends BaseFixture implements DependentFixtureInterface
 
             $article->setTitle($this->faker->randomElement(self::$articleTitles))
                 //->setSlug($this->faker->slug)
-                ->setAuthor($this->faker->randomElement(self::$articleAuthors))
+                //->setAuthor($this->faker->randomElement(self::$articleAuthors))
                 ->setImage($this->faker->randomElement(self::$articleImages))
             ;
 
@@ -97,6 +97,8 @@ EOF
             foreach ($tags as $tag) {
                 $article->addTag($tag);
             }
+
+            $article->setAuthor($this->getRandomReference('main_users'));
             //dump($tags);die;
 
             /*
@@ -134,6 +136,7 @@ EOF
     {
         return [
           TagFixtures::class,
+          UserFixture::class,
         ];
     }
 }

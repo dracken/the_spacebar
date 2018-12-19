@@ -35,7 +35,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Groups("main")
      */
-    private $firstname;
+    private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -53,9 +53,15 @@ class User implements UserInterface
      */
     private $apiTokens;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="author")
+     */
+    private $articles;
+
     public function __construct()
     {
         $this->apiTokens = new ArrayCollection();
+        $this->articles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -117,7 +123,6 @@ class User implements UserInterface
      */
     public function getSalt()
     {
-        // not needed for apps that do not check user passwords
         // not needed when using bcrypt or argon
     }
 
@@ -130,14 +135,14 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    public function getFirstname(): ?string
+    public function getFirstName(): ?string
     {
-        return $this->firstname;
+        return $this->firstName;
     }
 
-    public function setFirstname(string $firstname): self
+    public function setFirstName(string $firstName): self
     {
-        $this->firstname = $firstname;
+        $this->firstName = $firstName;
 
         return $this;
     }
@@ -166,9 +171,7 @@ class User implements UserInterface
         $url = 'https://robohash.org/'.$this->getEmail();
 
         if ($size)
-        {
             $url .= sprintf('?size=%dx%d', $size, $size);
-        }
 
         return $url;
     }
@@ -202,5 +205,41 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Article[]
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Article $article): self
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles[] = $article;
+            $article->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Article $article): self
+    {
+        if ($this->articles->contains($article)) {
+            $this->articles->removeElement($article);
+            // set the owning side to null (unless already changed)
+            if ($article->getAuthor() === $this) {
+                $article->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getFirstName();
     }
 }
