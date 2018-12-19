@@ -69,13 +69,16 @@ EOF
     /**
      * @Route("/admin/article/{id}/edit")
      * @param Article $article
+     * @IsGranted("MANAGE", subject="article")
      */
     public function edit(Article $article)
     {
-        if (!$this->isGranted('MANAGE', $article)) {
-            throw $this->createAccessDeniedException('No access!');
+        /** @var TYPE_NAME $article */
+        if (!$this->denyAccessUnlessGranted('MANAGE', $article)) {
+            //dd($article);
+            return $this->render('article/edit.html.twig',[
+                'article' => $article,
+            ]);
         }
-
-        dd($article);
     }
 }
