@@ -41,10 +41,15 @@ class ArticleAdminController extends AbstractController
 
             $datePublished  = new \DateTime('@'.strtotime('now'));
 
+            /** @var Article $article */
+            $article = $form->getData();
+            /*
             $data = $form->getData();
+            dd($data);
             $article = new Article();
             $article->SetTitle($data['title']);
             $article->setContent($data['content']);
+            */
             $article->setAuthor($this->getUser());
             $article->setImage('mercury.jpeg');
             $article->setPublished(true);
