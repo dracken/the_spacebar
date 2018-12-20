@@ -219,7 +219,7 @@ class User implements UserInterface
     {
         if (!$this->articles->contains($article)) {
             $this->articles[] = $article;
-            $article->setAuthor($this);
+            //$article->setAuthor($this);
         }
 
         return $this;

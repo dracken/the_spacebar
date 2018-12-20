@@ -81,6 +81,7 @@ class Article
     {
         $this->comments = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->publishedAt = new \DateTime();
     }
 
 
