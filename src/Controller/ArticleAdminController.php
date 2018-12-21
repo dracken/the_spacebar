@@ -7,7 +7,6 @@ use App\Entity\Article;
 use App\Form\ArticleFormType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use http\Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +24,9 @@ class ArticleAdminController extends AbstractController
      * @IsGranted("ROLE_ADMIN_ARTICLE")
      * @Route("/admin/article/new", name="app_articleadmin_new")
      * @param EntityManagerInterface $em
+     * @param Request $request
      * @return Response
+     * @throws \Exception
      */
     public function new(EntityManagerInterface $em, Request $request)
     {
@@ -113,20 +114,30 @@ EOF
     /**
      * @Route("/admin/article/{id}/edit", name="app_articleadmin_edit")
      * @param Article $article
-     * @IsGranted("MANAGE", subject="article")
+     * @param Request $request
+     * @param EntityManagerInterface $em
      * @return mixed
+     * @IsGranted("MANAGE", subject="article")
      */
-    public function edit(Article $article)
+    public function edit(Article $article, Request $request, EntityManagerInterface $em)
     {
-        /** @var Article $article */
-        if (!$this->denyAccessUnlessGranted('MANAGE', $article)) {
-            //dd($article);
-            return $this->render('article_admin/edit.html.twig',[
-                'article' => $article,
+        $form = $this->createForm(ArticleFormType::class, $article);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Article $article */
+            $article = $form->getData();
+            $em->persist($article);
+            $em->flush();
+
+            $this->addFlash('success', 'Article updated!  Return to <a href="/admin/article/" class="flash-url"> article list</a>');
+
+            return $this->redirectToRoute('app_articleadmin_edit', [
+                'id' => $article->getId(),
             ]);
         }
-
-        return $this->createAccessDeniedException();
+        return $this->render('article_admin/edit.html.twig', [
+            'articleForm' => $form->createView()
+        ]);
     }
 
     /**

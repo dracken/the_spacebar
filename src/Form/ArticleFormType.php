@@ -52,7 +52,7 @@ class ArticleFormType extends AbstractType
             ])
             ->add('image', ChoiceType::class, [
                 'choices' => [
-                    'Asteroid' => 'asterpod.jpeg',
+                    'Asteroid' => 'asteroid.jpeg',
                     'Lightspeed' => 'lightspeed.png',
                     'Mercury' => 'mercury.jpg',
                 ],

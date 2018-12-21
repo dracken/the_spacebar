@@ -1,0 +1,22 @@
+{{ form_start(articleForm) }}
+    {#{ form_widget(articleForm) }#}{# Standard way to iterate through the whole form #}
+    {{ form_row(articleForm.title, {
+        label: 'Article title'
+    }) }} {#form row is the quicker way to get to each portion of a form element #}
+
+    {# Detailed way to get to each element of a form # }
+    {{ form_label(articleForm.title, 'Article title') }}
+    {{ form_errors(articleForm.title) }}
+    {{ form_widget(articleForm.title) }}
+    {{ form_helper(articleForm.title) }}
+    {# End of individual control, usually better to use form_row for all values, unless needing more control#}
+
+
+    {{ form_row(articleForm.author) }}
+    {{ form_row(articleForm.content) }}
+    {{ form_row(articleForm.image) }}
+    {{ form_row(articleForm.publishedAt) }}
+    {{ form_row(articleForm.published) }}
+
+<button type="submit" class="btm btm-primary">{{  button_text }}</button>
+{{ form_end(articleForm) }}
