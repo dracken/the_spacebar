@@ -15,10 +15,21 @@
     {%  endif %}
 
     {# todo - replace with a Symfony form! #}
+
+    <div class="col-sm-12">
+        {{ form_start(registrationForm) }}
+            {{ form_widget(registrationForm) }}
+
+            <button class="'btn btn-lg btn-primary btn-block" type="submit">
+                Register
+            </button>
+        {{ form_end(registrationForm) }}
+    </div>
+    {#
     <form class="form-signin" method="post">
-        {#% if error %}
+        {% if error %}
             <div class="alert alert-danger">Danger Will Robinson!<br> {{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %#}
+        {% endif %}
         <h1 class="h3 mb-3 font-weight-normal">Register</h1>
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
@@ -35,6 +46,6 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit">
             Register
         </button>
-    </form>
+    </form>#}
 
 {% endblock %}
