@@ -5,13 +5,13 @@ namespace App\Form;
 
 
 use App\Entity\Article;
-use App\Entity\User;
+#use App\Entity\User;
 use App\Repository\UserRepository;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+#use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+#use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -31,6 +31,12 @@ class ArticleFormType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $article = $options['data'] ?? null;
+        $isEdit = $article && $article->getId();
+        //dd($options);
+        //dd($article);
+        //dd($isEdit);
+
         $builder
             ->add('title', TextType::class, [
                 'help' => 'Choose something catchy!',
@@ -52,7 +58,9 @@ class ArticleFormType extends AbstractType
                 'invalid_message' => 'Please select a user from the drop down.'
             ])
             */
-            ->add('author', UserSelectTextType::class)
+            ->add('author', UserSelectTextType::class, [
+                'disabled' => $isEdit
+            ])
             ->add('image', ChoiceType::class, [
                 'choices' => [
                     'Asteroid' => 'asteroid.jpeg',
@@ -61,19 +69,29 @@ class ArticleFormType extends AbstractType
                 ],
                 'placeholder' => 'Choose an image',
             ])
+            /*
             ->add('publishedAt', null, [
                 'widget' => 'single_text',
                 'data' => new \DateTime(),
 
             ])
+            */
+
             ->add('published')
         ;
+
+        if ($options['include_published_at']) {
+            $builder->add('publishedAt', null, [
+                'widget' => 'single_text',
+            ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
            'data_class' => Article::class,
+            'include_published_at' => false,
         ]);
     }
 }
