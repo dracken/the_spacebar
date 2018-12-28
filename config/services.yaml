@@ -40,7 +40,15 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
+    # Extend the twig date/time display
     app.twig.extension.date:
         class: Twig_Extensions_Extension_Date
         tags:
             - {name: 'twig.extension'}
+
+    # Extend all Textareas across the entire site - supposedly this declaration isn't needed in Symfony 4.2+, but was unable to get it to work without
+
+    App\Form\TypeExtension\TextareaSizeExtension:
+        tags:
+            - { name: form.type_extension,
+                extended_type: Symfony\Component\Form\Extension\Core\Type\TextareaType }
