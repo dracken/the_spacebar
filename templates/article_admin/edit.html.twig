@@ -1,14 +1,10 @@
-{% extends 'content_base.html.twig' %}
+{% extends 'article_admin/article_admin_base.html.twig' %}
 
 {% block content_body %}
+    <h1>Edit the Article! 🚀</h1>
 
-    <h1>Edit Article! 🚀</h1>
-
-{{ include('article_admin/_form.html.twig', {
-    button_text: 'Update!'
-}) }}
-<div><br>
-    <a href="{{ path('app_articleadmin_list') }}"><span class="btn btn-primary">Back to List</span></a>
-</div>
-
+    {{ include('article_admin/_form.html.twig', {
+        button_text: 'Update!'
+    }) }}
+    <a
 {% endblock %}

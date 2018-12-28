@@ -41,6 +41,7 @@ class ArticleFormType extends AbstractType
                     'toolbar' => 'full'
                 ]
             ])
+            /*
             ->add('author', EntityType::class, [
                 'class' => User::class,
                 'choice_label' => function(User $user) {
@@ -50,6 +51,8 @@ class ArticleFormType extends AbstractType
                 'choices' => $this->userRepository->findAllEmailAlphabetical(),
                 'invalid_message' => 'Please select a user from the drop down.'
             ])
+            */
+            ->add('author', UserSelectTextType::class)
             ->add('image', ChoiceType::class, [
                 'choices' => [
                     'Asteroid' => 'asteroid.jpeg',

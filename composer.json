@@ -17,6 +17,7 @@
         "nexylan/slack-bundle": "^2.0",
         "php-http/guzzle6-adapter": "1.1.1",
         "poldixd/markdown-helper": "^0.1.0",
+        "rollerworks/password-strength-bundle": "^2.0",
         "sensio/framework-extra-bundle": "^5.2",
         "sensiolabs/security-checker": "^5.0",
         "stof/doctrine-extensions-bundle": "^1.3",

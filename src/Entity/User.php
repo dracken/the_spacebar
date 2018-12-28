@@ -5,11 +5,17 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(
+ *     fields={"email"},
+ *     message="That email is already registered."
+ * )
  */
 class User implements UserInterface
 {
@@ -23,6 +29,8 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Groups("main")
+     * @Assert\NotBlank(message="Please enter a valid email address")
+     * @Assert\Email()
      */
     private $email;
 
@@ -57,6 +65,11 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="author")
      */
     private $articles;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $agreedTermsAt;
 
     public function __construct()
     {
@@ -169,6 +182,10 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @param string|null $size
+     * @return string
+     */
     public function getAvatarUrl(string $size = null): string
     {
         $url = 'https://robohash.org/'.$this->getEmail();
@@ -187,6 +204,10 @@ class User implements UserInterface
         return $this->apiTokens;
     }
 
+    /**
+     * @param ApiToken $apiToken
+     * @return User
+     */
     public function addApiToken(ApiToken $apiToken): self
     {
         if (!$this->apiTokens->contains($apiToken)) {
@@ -197,6 +218,10 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @param ApiToken $apiToken
+     * @return User
+     */
     public function removeApiToken(ApiToken $apiToken): self
     {
         if ($this->apiTokens->contains($apiToken)) {
@@ -218,6 +243,10 @@ class User implements UserInterface
         return $this->articles;
     }
 
+    /**
+     * @param Article $article
+     * @return User
+     */
     public function addArticle(Article $article): self
     {
         if (!$this->articles->contains($article)) {
@@ -228,6 +257,10 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @param Article $article
+     * @return User
+     */
     public function removeArticle(Article $article): self
     {
         if ($this->articles->contains($article)) {
@@ -241,8 +274,29 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function __toString()
     {
         return $this->getFirstName();
+    }
+
+    /**
+     * @return \DateTimeInterface|null
+     */
+    public function getAgreedTermsAt(): ?\DateTimeInterface
+    {
+        return $this->agreedTermsAt;
+    }
+
+    /**
+     * @param \DateTimeInterface $agreedTermsAt
+     * @return User
+     * @throws \Exception
+     */
+    public function agreedToTerms()
+    {
+        $this->agreedTermsAt = new \DateTime();
     }
 }

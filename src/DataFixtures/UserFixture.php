@@ -30,6 +30,7 @@ class UserFixture extends BaseFixture
             $user,
             'engage'
         ));
+        $user->agreedToTerms();
         if ($this->faker->boolean) {
             $user->setTwitterUsername($this->faker->userName);
         }
@@ -49,6 +50,7 @@ class UserFixture extends BaseFixture
                 $user,
                 'engage'
             ));
+            $user->agreedToTerms();
 
             $user->setRoles(['ROLE_ADMIN']);
             if ($this->faker->boolean) {

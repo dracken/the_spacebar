@@ -1,0 +1,11 @@
+###
+# @See http://www.pimwiddershoven.nl/entry/password-complexity-and-blacklist-in-symfony-optionally-with-fosuserbundle
+# @See https://github.com/rollerworks/PasswordStrengthBundle
+#
+##
+AppBundle\Entity\User:
+  properties:
+    plainPassword:
+      - Rollerworks\Bundle\PasswordStrengthBundle\Validator\Constraints\PasswordStrength:
+          minLength: 8
+          minStrength: 4

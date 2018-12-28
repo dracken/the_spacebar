@@ -60,12 +60,20 @@ class SecurityController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //dd($form->getData()); // Entire form object, with all children objects
+            //dd($form['plainPassword']->getData()); // Individual child form object from the parent object
+
             /** @var User $user */
             $user = $form->getData();
             $user->setPassword($passwordEncoder->encodePassword(
                 $user,
-                $user->getPassword()
+                $form['plainPassword']->getData()
             ));
+
+            if (true === $form['agreeTerms']->getData()) {
+                $user->agreedToTerms();
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
@@ -81,7 +89,7 @@ class SecurityController extends AbstractController
             'registrationForm' => $form->createView(),
         ]);
 
-        /*
+        /* //Old busted, replaced with the Symfony Forms & Validation
         if ($request->isMethod('POST')){
             $user = new User();
             $user->setEmail($request->request->get('email'));
