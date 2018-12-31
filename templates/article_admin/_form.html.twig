@@ -15,6 +15,10 @@
     {{ form_row(articleForm.author) }}
     {{ form_row(articleForm.content) }}
     {{ form_row(articleForm.image) }}
+    {{ form_row(articleForm.location) }}
+    {% if articleForm.specificLocationName is defined %}
+        {{ form_row(articleForm.specificLocationName) }}
+    {% endif %}
 
     {% if articleForm.publushedAt is defined %}
         {{ form_row(articleForm.publishedAt) }}
