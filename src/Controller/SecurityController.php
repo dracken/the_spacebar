@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\Model\UserRegistrationFormModel;
 use App\Form\UserRegistrationFormType;
 use App\Security\LoginFormAuthenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,6 +18,7 @@ class SecurityController extends AbstractController
 {
     /**
      * @Route("/login", name="app_login")
+     *
      * @param AuthenticationUtils $authenticationUtils
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -36,6 +38,7 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/logout", name="app_logout")
+     *
      * @throws \Exception
      */
     public function logout()
@@ -45,26 +48,44 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/register", name="app_register")
+     *
      * @param Request $request
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param GuardAuthenticatorHandler $guardHandler
      * @param LoginFormAuthenticator $formAuthenticator
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $formAuthenticator)
     {
         // TODO - use Symfony forms & validation
 
         $form = $this->createForm(UserRegistrationFormType::class);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             //dd($form->getData()); // Entire form object, with all children objects
             //dd($form['plainPassword']->getData()); // Individual child form object from the parent object
 
-            /** @var User $user */
+            // Change to Model instead of direct setters & getters in VC
+            /** @var UserRegistrationFormModel $userModel */
+            $userModel = $form->getData();
+
+            $user = new User();
+
+            $user->setEmail($userModel->email);
+            $user->setPassword($passwordEncoder->encodePassword(
+                $user,
+                $userModel->plainPassword
+            ));
+
+            if (true === $userModel->agreeTerms) {
+                $user->agreedToTerms();
+            }
+
+            /* * @var User $user * / // Not needed when using models
             $user = $form->getData();
+
             $user->setPassword($passwordEncoder->encodePassword(
                 $user,
                 $form['plainPassword']->getData()
@@ -73,6 +94,7 @@ class SecurityController extends AbstractController
             if (true === $form['agreeTerms']->getData()) {
                 $user->agreedToTerms();
             }
+            */
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
@@ -83,6 +105,7 @@ class SecurityController extends AbstractController
                 $formAuthenticator,
                 'main'
             );
+
         }
 
         return $this->render('security/register.html.twig', [
