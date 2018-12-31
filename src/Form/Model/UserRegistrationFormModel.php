@@ -4,23 +4,21 @@
 namespace App\Form\Model;
 
 
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use App\Validator\UniqueUser;
+use Doctrine\Common\Annotations\Annotation\Target;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class UserRegistrationFormModel
  * @package App\Form\Model
- *
- * @UniqueEntity(
- *     fields={"email"},
- *     message="That user already exists"
- * )
+ * @Target({"PROPERTY", "METHOD", "ANNOTATION"})
  */
 class UserRegistrationFormModel
 {
     /**
      * @Assert\NotBlank(message="Please enter an email")
      * @Assert\Email()
+     * @UniqueUser()
      */
     public $email;
 
