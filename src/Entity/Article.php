@@ -296,7 +296,7 @@ class Article
      */
     public function validate(ExecutionContextInterface $context, $payload)
     {
-        /* * /
+        /* * / //build violations are ways to filter out unwanted data
         if (stripos($this->getTitle(), 'the borg') !== false) {
             $context->buildViolation('Um... the Borg kinda makes us nervous')
                 ->atPath('title')
@@ -312,6 +312,11 @@ class Article
 
     public function setLocation(?string $location): self
     {
+        if (null === $location || 'interstellar_space' === $location)
+        {
+            $this->setSpecificLocationName(null);
+        }
+
         $this->location = $location;
 
         return $this;

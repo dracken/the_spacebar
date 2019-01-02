@@ -176,13 +176,17 @@ class ArticleFormType extends AbstractType
             'interstellar_space' => null,
         ];
 
-        return $locationNameChoices[$location];
+        return $locationNameChoices[$location] ?? null;
     }
 
+    /**
+     * @param FormInterface $form
+     * @param string|null $location
+     */
     private function setupSpecificLocationNameField(FormInterface $form, ?string $location)
     {
 
-        if (null === $location)
+        if (null === $location ?? null)
         {
             $form->remove('specificLocationName');
 
@@ -191,7 +195,7 @@ class ArticleFormType extends AbstractType
 
         $choices = $this->getLocationNameChoices($location);
 
-        if (null === $choices)
+        if (null === $choices ?? null)
         {
             $form->remove('specificLocationName');
 
