@@ -21,6 +21,8 @@ ENV COMPOSER_VERSION 1.7.3
 #USER swuser
 
 RUN echo "alias ll='ls -hAlt --color=auto'" >> ~/.bashrc \
+    && echo "export COMPOSER_MEMORY_LIMIT=-1" >> ~/.bashrc \
+    && echo "export PS1=\"\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ \"" >> ~/.bashrc \
 	&& echo "America/Denver" > /etc/timezone \
 	&& dpkg-reconfigure -f noninteractive tzdata \
 	&& apt -yqq update \
@@ -42,23 +44,23 @@ RUN pecl config-set php_ini /usr/local/etc/php/php.ini-development \
 RUN curl --silent --show-error https://getcomposer.org/installer | php && \
 	mv -f composer.phar /usr/local/bin/composer 
 	
-COPY composer.auth.json /root/.composer/auth.json
+#COPY composer.auth.json /root/.composer/auth.json
 #&& \
 # ./composer update
 
 
-WORKDIR /var/www/api
+WORKDIR /var/www
 
 # Copy over shell scripts
-COPY doctrine_setup.sh /tmp/doctrine_setup.sh
-COPY composer_setup.sh /tmp/composer_setup.sh
-COPY composer.auth.json /root/.composer/auth.json
+#COPY doctrine_setup.sh /tmp/doctrine_setup.sh
+#COPY composer_setup.sh /tmp/composer_setup.sh
+#COPY composer.auth.json /root/.composer/auth.json
 
 # Run the Doctrine Setup
-RUN chmod 755 /tmp/doctrine_setup.sh \
-	&& /tmp/doctrine_setup.sh 
+#RUN chmod 755 /tmp/doctrine_setup.sh \
+#	&& /tmp/doctrine_setup.sh
 	
 #Run the Composer Setup
-RUN chmod 755 /tmp/composer_setup.sh \
-	&& /tmp/composer_setup.sh
+#RUN chmod 755 /tmp/composer_setup.sh \
+#	&& /tmp/composer_setup.sh
 	

@@ -17,6 +17,8 @@ COPY nginx.conf /etc/nginx/nginx.conf
 COPY mime.types /etc/nginx/mime.types
 
 RUN echo "alias ll='ls -hAlt --color=auto'" >> ~/.bashrc \
+    && echo "export COMPOSER_MEMORY_LIMIT=-1" >> ~/.bashrc \
+    && echo "export PS1=\"\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\[\033[m\]\$ \"" >> ~/.bashrc \
     && rm -rf /var/www/api/var/logs \
     && rm -rf /var/www/api/var/cache \
     && mkdir -p /var/www/api/var/logs \

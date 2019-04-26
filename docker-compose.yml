@@ -1,5 +1,5 @@
 ##
-#   Docker Compose File for Stay Alert API
+#   Docker Compose File for Symfonycast's The Spacebar
 #
 # Requires Docker 18.06.0+
 #
@@ -19,13 +19,14 @@ services:
             - .docker/data/db:/var/lib/mysql
         env_file:
             - .env.local
+            - ~/.local.env
         ports:
             - "3307:3306"
         environment:
-            SPACEBAR_MYSQL_ROOT_PASSWORD=root_password:
+            MYSQL_ROOT_PASSWORD: root_password
 
     # See https://hub.docker.com/_/nginx/
-    nginx-api:
+    nginx:
         build: docker/the_spacebar_nginx/.
         image: the-spacebar-nginx
         hostname: the_spacebar_nginx.local
@@ -36,15 +37,15 @@ services:
             - .:/var/www/:rw
             - ./logs:/var/log/nginx
         depends_on:
-            - php-api
+            - php
         links:
-            - php-api
+            - php
         command: [nginx-debug, '-g', 'daemon off;']
         environment:
             HOSTNAME: the_spacebar_nginx.local
 
     # See https://hub.docker.com/_/php/
-    php-api:
+    php:
         build: docker/the_spacebar_php/.
         image: the-spacebar-php-fpm
         hostname: the_spacebar_php.local
@@ -63,7 +64,12 @@ services:
         links:
             - mysql
         env_file:
-            - api/.env.local
+            - .env.local
+            - ~/.local.env
         tty: true
         expose:
             - 9000 
+
+networks:
+    default:
+        name: the_spacebar

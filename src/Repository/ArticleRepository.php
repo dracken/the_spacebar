@@ -15,13 +15,19 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class ArticleRepository extends ServiceEntityRepository
 {
+    /**
+     * ArticleRepository constructor.
+     * @param RegistryInterface $registry
+     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Article::class);
     }
 
     /**
-     * @returns Article[]
+     * @param int $maxResults
+     * @return mixed
+     * @throws \Doctrine\ORM\Query\QueryException
      */
     public function findAllPublishedOrderedByNewest(int $maxResults = 5)
     {
@@ -38,12 +44,20 @@ class ArticleRepository extends ServiceEntityRepository
             ;
     }
 
+    /**
+     * @param QueryBuilder|null $qb
+     * @return QueryBuilder
+     */
     private function addIsPublishedQueryBuilder(QueryBuilder $qb = null)
     {
         return $this->getOrCreateQueryBuilder($qb)
             ->andWhere('articles.published = 1');
     }
 
+    /**
+     * @param QueryBuilder|null $qb
+     * @return QueryBuilder
+     */
     private function getOrCreateQueryBuilder(QueryBuilder $qb = null)
     {
         return $qb ?: $this->createQueryBuilder('articles');

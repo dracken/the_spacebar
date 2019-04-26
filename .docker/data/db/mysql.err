@@ -1,0 +1,245 @@
+2019-04-26 14:11:36 0 [ERROR] mysqld: Can't open shared library '/usr/lib/mysql/plugin/ha_connect.so' (errno: 0, cannot open shared object file: No such file or directory)
+2019-04-26 14:11:36 0 [ERROR] Couldn't load plugins from 'ha_connect.so'.
+2019-04-26 14:11:40 6 [Warning] Failed to load slave replication state from table mysql.gtid_slave_pos: 1146: Table 'mysql.gtid_slave_pos' doesn't exist
+2019-04-26 14:11:45 0 [Note] Using unique option prefix 'myisam_recover' is error-prone and can break in the future. Please use the full name 'myisam-recover-options' instead.
+2019-04-26 14:11:45 0 [ERROR] mysqld: Can't open shared library '/usr/lib/mysql/plugin/ha_connect.so' (errno: 0, cannot open shared object file: No such file or directory)
+2019-04-26 14:11:45 0 [ERROR] Couldn't load plugins from 'ha_connect.so'.
+2019-04-26 14:11:45 0 [Note] InnoDB: Using Linux native AIO
+2019-04-26 14:11:45 0 [Note] InnoDB: Mutexes and rw_locks use GCC atomic builtins
+2019-04-26 14:11:45 0 [Note] InnoDB: Uses event mutexes
+2019-04-26 14:11:45 0 [Note] InnoDB: Compressed tables use zlib 1.2.11
+2019-04-26 14:11:45 0 [Note] InnoDB: Number of pools: 1
+2019-04-26 14:11:45 0 [Note] InnoDB: Using SSE2 crc32 instructions
+2019-04-26 14:11:45 0 [Note] InnoDB: Initializing buffer pool, total size = 8M, instances = 1, chunk size = 8M
+2019-04-26 14:11:45 0 [Note] InnoDB: Completed initialization of buffer pool
+2019-04-26 14:11:45 0 [Note] InnoDB: If the mysqld execution user is authorized, page cleaner thread priority can be changed. See the man page of setpriority().
+2019-04-26 14:11:45 0 [Note] InnoDB: 128 out of 128 rollback segments are active.
+2019-04-26 14:11:45 0 [Note] InnoDB: Creating shared tablespace for temporary tables
+2019-04-26 14:11:45 0 [Note] InnoDB: Setting file './ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+2019-04-26 14:11:46 0 [Note] InnoDB: File './ibtmp1' size is now 12 MB.
+2019-04-26 14:11:46 0 [Note] InnoDB: 10.3.14 started; log sequence number 1630824; transaction id 21
+2019-04-26 14:11:46 0 [Note] Plugin 'FEEDBACK' is disabled.
+2019-04-26 14:11:46 0 [Note] InnoDB: Loading buffer pool(s) from /var/lib/mysql/ib_buffer_pool
+2019-04-26 14:11:46 0 [Note] InnoDB: Buffer pool(s) load completed at 190426 14:11:46
+2019-04-26 14:11:46 0 [Note] Reading of all Master_info entries succeded
+2019-04-26 14:11:46 0 [Note] Added new Master_info '' to hash table
+2019-04-26 14:11:46 0 [Note] mysqld: ready for connections.
+Version: '10.3.14-MariaDB-1:10.3.14+maria~bionic-log'  socket: '/var/run/mysqld/mysqld.sock'  port: 0  mariadb.org binary distribution
+2019-04-26 14:12:07 0 [Note] mysqld (initiated by: unknown): Normal shutdown
+2019-04-26 14:12:07 0 [Note] Event Scheduler: Purging the queue. 0 events
+2019-04-26 14:12:07 0 [Note] InnoDB: FTS optimize thread exiting.
+2019-04-26 14:12:07 0 [Note] InnoDB: Starting shutdown...
+2019-04-26 14:12:07 0 [Note] InnoDB: Dumping buffer pool(s) to /var/lib/mysql/ib_buffer_pool
+2019-04-26 14:12:07 0 [Note] InnoDB: Instance 0, restricted to 127 pages due to innodb_buf_pool_dump_pct=25
+2019-04-26 14:12:07 0 [Note] InnoDB: Buffer pool(s) dump completed at 190426 14:12:07
+2019-04-26 14:12:08 0 [Note] InnoDB: Shutdown completed; log sequence number 1630833; transaction id 24
+2019-04-26 14:12:08 0 [Note] InnoDB: Removed temporary tablespace data file: "ibtmp1"
+2019-04-26 14:12:08 0 [Note] mysqld: Shutdown complete
+
+2019-04-26 14:12:09 0 [Note] Using unique option prefix 'myisam_recover' is error-prone and can break in the future. Please use the full name 'myisam-recover-options' instead.
+2019-04-26 14:12:09 0 [ERROR] mysqld: Can't open shared library '/usr/lib/mysql/plugin/ha_connect.so' (errno: 0, cannot open shared object file: No such file or directory)
+2019-04-26 14:12:09 0 [ERROR] Couldn't load plugins from 'ha_connect.so'.
+2019-04-26 14:12:09 0 [Note] InnoDB: Using Linux native AIO
+2019-04-26 14:12:09 0 [Note] InnoDB: Mutexes and rw_locks use GCC atomic builtins
+2019-04-26 14:12:09 0 [Note] InnoDB: Uses event mutexes
+2019-04-26 14:12:09 0 [Note] InnoDB: Compressed tables use zlib 1.2.11
+2019-04-26 14:12:09 0 [Note] InnoDB: Number of pools: 1
+2019-04-26 14:12:09 0 [Note] InnoDB: Using SSE2 crc32 instructions
+2019-04-26 14:12:09 0 [Note] InnoDB: Initializing buffer pool, total size = 8M, instances = 1, chunk size = 8M
+2019-04-26 14:12:09 0 [Note] InnoDB: Completed initialization of buffer pool
+2019-04-26 14:12:09 0 [Note] InnoDB: If the mysqld execution user is authorized, page cleaner thread priority can be changed. See the man page of setpriority().
+2019-04-26 14:12:09 0 [Note] InnoDB: 128 out of 128 rollback segments are active.
+2019-04-26 14:12:09 0 [Note] InnoDB: Creating shared tablespace for temporary tables
+2019-04-26 14:12:09 0 [Note] InnoDB: Setting file './ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+2019-04-26 14:12:10 0 [Note] InnoDB: File './ibtmp1' size is now 12 MB.
+2019-04-26 14:12:10 0 [Note] InnoDB: 10.3.14 started; log sequence number 1630833; transaction id 21
+2019-04-26 14:12:10 0 [Note] Plugin 'FEEDBACK' is disabled.
+2019-04-26 14:12:10 0 [Note] InnoDB: Loading buffer pool(s) from /var/lib/mysql/ib_buffer_pool
+2019-04-26 14:12:10 0 [Note] InnoDB: Buffer pool(s) load completed at 190426 14:12:10
+2019-04-26 14:12:10 0 [Note] Server socket created on IP: '0.0.0.0'.
+2019-04-26 14:12:10 0 [Note] Reading of all Master_info entries succeded
+2019-04-26 14:12:10 0 [Note] Added new Master_info '' to hash table
+2019-04-26 14:12:10 0 [Note] mysqld: ready for connections.
+Version: '10.3.14-MariaDB-1:10.3.14+maria~bionic-log'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  mariadb.org binary distribution
+2019-04-26 14:18:32 0 [Note] mysqld (initiated by: unknown): Normal shutdown
+2019-04-26 14:18:32 0 [Note] Event Scheduler: Purging the queue. 0 events
+2019-04-26 14:18:32 0 [Note] InnoDB: FTS optimize thread exiting.
+2019-04-26 14:18:32 0 [Note] InnoDB: Starting shutdown...
+2019-04-26 14:18:32 0 [Note] InnoDB: Dumping buffer pool(s) to /var/lib/mysql/ib_buffer_pool
+2019-04-26 14:18:32 0 [Note] InnoDB: Instance 0, restricted to 128 pages due to innodb_buf_pool_dump_pct=25
+2019-04-26 14:18:32 0 [Note] InnoDB: Buffer pool(s) dump completed at 190426 14:18:32
+2019-04-26 14:18:33 0 [Note] InnoDB: Shutdown completed; log sequence number 1630842; transaction id 22
+2019-04-26 14:18:33 0 [Note] InnoDB: Removed temporary tablespace data file: "ibtmp1"
+2019-04-26 14:18:33 0 [Note] mysqld: Shutdown complete
+
+2019-04-26 14:18:37 0 [Note] Using unique option prefix 'myisam_recover' is error-prone and can break in the future. Please use the full name 'myisam-recover-options' instead.
+2019-04-26 14:18:37 0 [ERROR] mysqld: Can't open shared library '/usr/lib/mysql/plugin/ha_connect.so' (errno: 0, cannot open shared object file: No such file or directory)
+2019-04-26 14:18:37 0 [ERROR] Couldn't load plugins from 'ha_connect.so'.
+2019-04-26 14:18:37 0 [Note] InnoDB: Using Linux native AIO
+2019-04-26 14:18:37 0 [Note] InnoDB: Mutexes and rw_locks use GCC atomic builtins
+2019-04-26 14:18:37 0 [Note] InnoDB: Uses event mutexes
+2019-04-26 14:18:37 0 [Note] InnoDB: Compressed tables use zlib 1.2.11
+2019-04-26 14:18:37 0 [Note] InnoDB: Number of pools: 1
+2019-04-26 14:18:37 0 [Note] InnoDB: Using SSE2 crc32 instructions
+2019-04-26 14:18:37 0 [Note] InnoDB: Initializing buffer pool, total size = 8M, instances = 1, chunk size = 8M
+2019-04-26 14:18:37 0 [Note] InnoDB: Completed initialization of buffer pool
+2019-04-26 14:18:37 0 [Note] InnoDB: If the mysqld execution user is authorized, page cleaner thread priority can be changed. See the man page of setpriority().
+2019-04-26 14:18:37 0 [Note] InnoDB: 128 out of 128 rollback segments are active.
+2019-04-26 14:18:37 0 [Note] InnoDB: Creating shared tablespace for temporary tables
+2019-04-26 14:18:37 0 [Note] InnoDB: Setting file './ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+2019-04-26 14:18:37 0 [Note] InnoDB: File './ibtmp1' size is now 12 MB.
+2019-04-26 14:18:37 0 [Note] InnoDB: 10.3.14 started; log sequence number 1630842; transaction id 21
+2019-04-26 14:18:37 0 [Note] Plugin 'FEEDBACK' is disabled.
+2019-04-26 14:18:37 0 [Note] InnoDB: Loading buffer pool(s) from /var/lib/mysql/ib_buffer_pool
+2019-04-26 14:18:37 0 [Note] InnoDB: Buffer pool(s) load completed at 190426 14:18:37
+2019-04-26 14:18:37 0 [Note] Server socket created on IP: '0.0.0.0'.
+2019-04-26 14:18:38 0 [Note] Reading of all Master_info entries succeded
+2019-04-26 14:18:38 0 [Note] Added new Master_info '' to hash table
+2019-04-26 14:18:38 0 [Note] mysqld: ready for connections.
+Version: '10.3.14-MariaDB-1:10.3.14+maria~bionic-log'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  mariadb.org binary distribution
+2019-04-26 14:20:54 0 [Note] mysqld (initiated by: unknown): Normal shutdown
+2019-04-26 14:20:54 0 [Note] Event Scheduler: Purging the queue. 0 events
+2019-04-26 14:20:54 0 [Note] InnoDB: FTS optimize thread exiting.
+2019-04-26 14:20:54 0 [Note] InnoDB: Starting shutdown...
+2019-04-26 14:20:54 0 [Note] InnoDB: Dumping buffer pool(s) to /var/lib/mysql/ib_buffer_pool
+2019-04-26 14:20:54 0 [Note] InnoDB: Instance 0, restricted to 128 pages due to innodb_buf_pool_dump_pct=25
+2019-04-26 14:20:54 0 [Note] InnoDB: Buffer pool(s) dump completed at 190426 14:20:54
+2019-04-26 14:20:55 0 [Note] InnoDB: Shutdown completed; log sequence number 1630851; transaction id 22
+2019-04-26 14:20:55 0 [Note] InnoDB: Removed temporary tablespace data file: "ibtmp1"
+2019-04-26 14:20:55 0 [Note] mysqld: Shutdown complete
+
+2019-04-26 14:20:59 0 [Note] Using unique option prefix 'myisam_recover' is error-prone and can break in the future. Please use the full name 'myisam-recover-options' instead.
+2019-04-26 14:20:59 0 [ERROR] mysqld: Can't open shared library '/usr/lib/mysql/plugin/ha_connect.so' (errno: 0, cannot open shared object file: No such file or directory)
+2019-04-26 14:20:59 0 [ERROR] Couldn't load plugins from 'ha_connect.so'.
+2019-04-26 14:20:59 0 [Note] InnoDB: Using Linux native AIO
+2019-04-26 14:20:59 0 [Note] InnoDB: Mutexes and rw_locks use GCC atomic builtins
+2019-04-26 14:20:59 0 [Note] InnoDB: Uses event mutexes
+2019-04-26 14:20:59 0 [Note] InnoDB: Compressed tables use zlib 1.2.11
+2019-04-26 14:20:59 0 [Note] InnoDB: Number of pools: 1
+2019-04-26 14:20:59 0 [Note] InnoDB: Using SSE2 crc32 instructions
+2019-04-26 14:20:59 0 [Note] InnoDB: Initializing buffer pool, total size = 8M, instances = 1, chunk size = 8M
+2019-04-26 14:20:59 0 [Note] InnoDB: Completed initialization of buffer pool
+2019-04-26 14:20:59 0 [Note] InnoDB: If the mysqld execution user is authorized, page cleaner thread priority can be changed. See the man page of setpriority().
+2019-04-26 14:20:59 0 [Note] InnoDB: 128 out of 128 rollback segments are active.
+2019-04-26 14:20:59 0 [Note] InnoDB: Creating shared tablespace for temporary tables
+2019-04-26 14:20:59 0 [Note] InnoDB: Setting file './ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+2019-04-26 14:21:00 0 [Note] InnoDB: File './ibtmp1' size is now 12 MB.
+2019-04-26 14:21:00 0 [Note] InnoDB: 10.3.14 started; log sequence number 1630851; transaction id 21
+2019-04-26 14:21:00 0 [Note] Plugin 'FEEDBACK' is disabled.
+2019-04-26 14:21:00 0 [Note] InnoDB: Loading buffer pool(s) from /var/lib/mysql/ib_buffer_pool
+2019-04-26 14:21:00 0 [Note] InnoDB: Buffer pool(s) load completed at 190426 14:21:00
+2019-04-26 14:21:00 0 [Note] Server socket created on IP: '0.0.0.0'.
+2019-04-26 14:21:00 0 [Note] Reading of all Master_info entries succeded
+2019-04-26 14:21:00 0 [Note] Added new Master_info '' to hash table
+2019-04-26 14:21:00 0 [Note] mysqld: ready for connections.
+Version: '10.3.14-MariaDB-1:10.3.14+maria~bionic-log'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  mariadb.org binary distribution
+2019-04-26 14:33:38 0 [Note] mysqld (initiated by: unknown): Normal shutdown
+2019-04-26 14:33:38 0 [Note] Event Scheduler: Purging the queue. 0 events
+2019-04-26 14:33:38 0 [Note] InnoDB: FTS optimize thread exiting.
+2019-04-26 14:33:38 0 [Note] InnoDB: Starting shutdown...
+2019-04-26 14:33:38 0 [Note] InnoDB: Dumping buffer pool(s) to /var/lib/mysql/ib_buffer_pool
+2019-04-26 14:33:38 0 [Note] InnoDB: Instance 0, restricted to 128 pages due to innodb_buf_pool_dump_pct=25
+2019-04-26 14:33:38 0 [Note] InnoDB: Buffer pool(s) dump completed at 190426 14:33:38
+2019-04-26 14:33:39 0 [Note] InnoDB: Shutdown completed; log sequence number 1630860; transaction id 22
+2019-04-26 14:33:39 0 [Note] InnoDB: Removed temporary tablespace data file: "ibtmp1"
+2019-04-26 14:33:39 0 [Note] mysqld: Shutdown complete
+
+2019-04-26 14:33:43 0 [Note] Using unique option prefix 'myisam_recover' is error-prone and can break in the future. Please use the full name 'myisam-recover-options' instead.
+2019-04-26 14:33:43 0 [ERROR] mysqld: Can't open shared library '/usr/lib/mysql/plugin/ha_connect.so' (errno: 0, cannot open shared object file: No such file or directory)
+2019-04-26 14:33:43 0 [ERROR] Couldn't load plugins from 'ha_connect.so'.
+2019-04-26 14:33:43 0 [Note] InnoDB: Using Linux native AIO
+2019-04-26 14:33:43 0 [Note] InnoDB: Mutexes and rw_locks use GCC atomic builtins
+2019-04-26 14:33:43 0 [Note] InnoDB: Uses event mutexes
+2019-04-26 14:33:43 0 [Note] InnoDB: Compressed tables use zlib 1.2.11
+2019-04-26 14:33:43 0 [Note] InnoDB: Number of pools: 1
+2019-04-26 14:33:43 0 [Note] InnoDB: Using SSE2 crc32 instructions
+2019-04-26 14:33:43 0 [Note] InnoDB: Initializing buffer pool, total size = 8M, instances = 1, chunk size = 8M
+2019-04-26 14:33:43 0 [Note] InnoDB: Completed initialization of buffer pool
+2019-04-26 14:33:43 0 [Note] InnoDB: If the mysqld execution user is authorized, page cleaner thread priority can be changed. See the man page of setpriority().
+2019-04-26 14:33:43 0 [Note] InnoDB: 128 out of 128 rollback segments are active.
+2019-04-26 14:33:43 0 [Note] InnoDB: Creating shared tablespace for temporary tables
+2019-04-26 14:33:43 0 [Note] InnoDB: Setting file './ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+2019-04-26 14:33:44 0 [Note] InnoDB: File './ibtmp1' size is now 12 MB.
+2019-04-26 14:33:44 0 [Note] InnoDB: Waiting for purge to start
+2019-04-26 14:33:44 0 [Note] InnoDB: 10.3.14 started; log sequence number 1630860; transaction id 21
+2019-04-26 14:33:44 0 [Note] Plugin 'FEEDBACK' is disabled.
+2019-04-26 14:33:44 0 [Note] InnoDB: Loading buffer pool(s) from /var/lib/mysql/ib_buffer_pool
+2019-04-26 14:33:44 0 [Note] InnoDB: Buffer pool(s) load completed at 190426 14:33:44
+2019-04-26 14:33:44 0 [Note] Server socket created on IP: '0.0.0.0'.
+2019-04-26 14:33:44 0 [Note] Reading of all Master_info entries succeded
+2019-04-26 14:33:44 0 [Note] Added new Master_info '' to hash table
+2019-04-26 14:33:44 0 [Note] mysqld: ready for connections.
+Version: '10.3.14-MariaDB-1:10.3.14+maria~bionic-log'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  mariadb.org binary distribution
+2019-04-26 15:41:21 9 [Warning] IP address '172.20.0.1' could not be resolved: Name or service not known
+2019-04-26 16:23:18 0 [Note] mysqld (initiated by: unknown): Normal shutdown
+2019-04-26 16:23:18 0 [Note] Event Scheduler: Purging the queue. 0 events
+2019-04-26 16:23:18 0 [Note] InnoDB: FTS optimize thread exiting.
+2019-04-26 16:23:18 0 [Note] InnoDB: Starting shutdown...
+2019-04-26 16:23:18 0 [Note] InnoDB: Dumping buffer pool(s) to /var/lib/mysql/ib_buffer_pool
+2019-04-26 16:23:18 0 [Note] InnoDB: Instance 0, restricted to 127 pages due to innodb_buf_pool_dump_pct=25
+2019-04-26 16:23:18 0 [Note] InnoDB: Buffer pool(s) dump completed at 190426 16:23:18
+2019-04-26 16:23:20 0 [Note] InnoDB: Shutdown completed; log sequence number 1630869; transaction id 22
+2019-04-26 16:23:20 0 [Note] InnoDB: Removed temporary tablespace data file: "ibtmp1"
+2019-04-26 16:23:20 0 [Note] mysqld: Shutdown complete
+
+2019-04-26 16:23:24 0 [Note] Using unique option prefix 'myisam_recover' is error-prone and can break in the future. Please use the full name 'myisam-recover-options' instead.
+2019-04-26 16:23:24 0 [ERROR] mysqld: Can't open shared library '/usr/lib/mysql/plugin/ha_connect.so' (errno: 0, cannot open shared object file: No such file or directory)
+2019-04-26 16:23:24 0 [ERROR] Couldn't load plugins from 'ha_connect.so'.
+2019-04-26 16:23:24 0 [Note] InnoDB: Using Linux native AIO
+2019-04-26 16:23:24 0 [Note] InnoDB: Mutexes and rw_locks use GCC atomic builtins
+2019-04-26 16:23:24 0 [Note] InnoDB: Uses event mutexes
+2019-04-26 16:23:24 0 [Note] InnoDB: Compressed tables use zlib 1.2.11
+2019-04-26 16:23:24 0 [Note] InnoDB: Number of pools: 1
+2019-04-26 16:23:24 0 [Note] InnoDB: Using SSE2 crc32 instructions
+2019-04-26 16:23:24 0 [Note] InnoDB: Initializing buffer pool, total size = 8M, instances = 1, chunk size = 8M
+2019-04-26 16:23:24 0 [Note] InnoDB: Completed initialization of buffer pool
+2019-04-26 16:23:24 0 [Note] InnoDB: If the mysqld execution user is authorized, page cleaner thread priority can be changed. See the man page of setpriority().
+2019-04-26 16:23:24 0 [Note] InnoDB: 128 out of 128 rollback segments are active.
+2019-04-26 16:23:24 0 [Note] InnoDB: Creating shared tablespace for temporary tables
+2019-04-26 16:23:24 0 [Note] InnoDB: Setting file './ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+2019-04-26 16:23:25 0 [Note] InnoDB: File './ibtmp1' size is now 12 MB.
+2019-04-26 16:23:25 0 [Note] InnoDB: 10.3.14 started; log sequence number 1630869; transaction id 21
+2019-04-26 16:23:25 0 [Note] Plugin 'FEEDBACK' is disabled.
+2019-04-26 16:23:25 0 [Note] InnoDB: Loading buffer pool(s) from /var/lib/mysql/ib_buffer_pool
+2019-04-26 16:23:25 0 [Note] InnoDB: Buffer pool(s) load completed at 190426 16:23:25
+2019-04-26 16:23:25 0 [Note] Server socket created on IP: '0.0.0.0'.
+2019-04-26 16:23:25 0 [Note] Reading of all Master_info entries succeded
+2019-04-26 16:23:25 0 [Note] Added new Master_info '' to hash table
+2019-04-26 16:23:25 0 [Note] mysqld: ready for connections.
+Version: '10.3.14-MariaDB-1:10.3.14+maria~bionic-log'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  mariadb.org binary distribution
+2019-04-26 16:28:27 0 [Note] mysqld (initiated by: unknown): Normal shutdown
+2019-04-26 16:28:27 0 [Note] Event Scheduler: Purging the queue. 0 events
+2019-04-26 16:28:27 0 [Note] InnoDB: FTS optimize thread exiting.
+2019-04-26 16:28:27 0 [Note] InnoDB: Starting shutdown...
+2019-04-26 16:28:27 0 [Note] InnoDB: Dumping buffer pool(s) to /var/lib/mysql/ib_buffer_pool
+2019-04-26 16:28:27 0 [Note] InnoDB: Instance 0, restricted to 128 pages due to innodb_buf_pool_dump_pct=25
+2019-04-26 16:28:27 0 [Note] InnoDB: Buffer pool(s) dump completed at 190426 16:28:27
+2019-04-26 16:28:28 0 [Note] InnoDB: Shutdown completed; log sequence number 1630878; transaction id 22
+2019-04-26 16:28:28 0 [Note] InnoDB: Removed temporary tablespace data file: "ibtmp1"
+2019-04-26 16:28:28 0 [Note] mysqld: Shutdown complete
+
+2019-04-26 16:28:32 0 [Note] Using unique option prefix 'myisam_recover' is error-prone and can break in the future. Please use the full name 'myisam-recover-options' instead.
+2019-04-26 16:28:32 0 [ERROR] mysqld: Can't open shared library '/usr/lib/mysql/plugin/ha_connect.so' (errno: 0, cannot open shared object file: No such file or directory)
+2019-04-26 16:28:32 0 [ERROR] Couldn't load plugins from 'ha_connect.so'.
+2019-04-26 16:28:32 0 [Note] InnoDB: Using Linux native AIO
+2019-04-26 16:28:32 0 [Note] InnoDB: Mutexes and rw_locks use GCC atomic builtins
+2019-04-26 16:28:32 0 [Note] InnoDB: Uses event mutexes
+2019-04-26 16:28:32 0 [Note] InnoDB: Compressed tables use zlib 1.2.11
+2019-04-26 16:28:32 0 [Note] InnoDB: Number of pools: 1
+2019-04-26 16:28:32 0 [Note] InnoDB: Using SSE2 crc32 instructions
+2019-04-26 16:28:32 0 [Note] InnoDB: Initializing buffer pool, total size = 8M, instances = 1, chunk size = 8M
+2019-04-26 16:28:32 0 [Note] InnoDB: Completed initialization of buffer pool
+2019-04-26 16:28:32 0 [Note] InnoDB: If the mysqld execution user is authorized, page cleaner thread priority can be changed. See the man page of setpriority().
+2019-04-26 16:28:32 0 [Note] InnoDB: 128 out of 128 rollback segments are active.
+2019-04-26 16:28:32 0 [Note] InnoDB: Creating shared tablespace for temporary tables
+2019-04-26 16:28:32 0 [Note] InnoDB: Setting file './ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+2019-04-26 16:28:33 0 [Note] InnoDB: File './ibtmp1' size is now 12 MB.
+2019-04-26 16:28:33 0 [Note] InnoDB: 10.3.14 started; log sequence number 1630878; transaction id 21
+2019-04-26 16:28:33 0 [Note] Plugin 'FEEDBACK' is disabled.
+2019-04-26 16:28:33 0 [Note] InnoDB: Loading buffer pool(s) from /var/lib/mysql/ib_buffer_pool
+2019-04-26 16:28:33 0 [Note] InnoDB: Buffer pool(s) load completed at 190426 16:28:33
+2019-04-26 16:28:33 0 [Note] Server socket created on IP: '0.0.0.0'.
+2019-04-26 16:28:33 0 [Note] Reading of all Master_info entries succeded
+2019-04-26 16:28:33 0 [Note] Added new Master_info '' to hash table
+2019-04-26 16:28:33 0 [Note] mysqld: ready for connections.
+Version: '10.3.14-MariaDB-1:10.3.14+maria~bionic-log'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  mariadb.org binary distribution
